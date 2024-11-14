@@ -18,7 +18,8 @@ body{
 
 .wrapper{
     width: 420px;
-    background: blue;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
     color: #fff;
     border-radius: 10px;
     padding: 30px 40px;

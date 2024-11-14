@@ -11,22 +11,22 @@
 
 <body>
     <div class="wrapper">
-        <form action="">
-            <h1>Login</h1>
+        <form action="/admsis/login/logar.php" method="POST">
+            <h1>Email</h1>
             <div class="input-box">
-                <input type="text" placeholder="Username" required>
+                <input type="text" name="email" id="email" placeholder="email" autocomplete="off" required>
                 <i class="bx bxs-user"></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="password" required>
+                <input type="password" name="senha" id="senha" placeholder="password" required>
                 <i class="bx bxs-lock-alt"></i>
             </div>
 
             <div class="remember-forgot">
-                <label><input type="checkbox">Remember me</label>
+                <label><input name="lembrar" id="lembrar" type="checkbox">Remember me</label>
             </div>
 
-            <button type="submit" class="btn">Login</button>
+            <input type="submit" class="btn" name="submit" value="submit">
         </form>
     </div>    
 </body>
