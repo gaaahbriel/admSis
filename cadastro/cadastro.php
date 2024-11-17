@@ -1,4 +1,5 @@
 <?php
+include('../connect.php');
 session_start();
 print_r($_SESSION);
 if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)){
@@ -8,6 +9,10 @@ if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)
 }else {
     $logado = $_SESSION['email'];
 }
+
+$sql = "SELECT * from cadastro;";
+
+$result = $conn -> query($sql);
 
 ?>
 
@@ -31,7 +36,7 @@ if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)
                     <span class="nav-item">Fulano</span>
                 </a>
             </li>
-            <li><a href="/admsis/cadastro/cadastro.html">
+            <li><a href="/admsis/cadastro/cadastro.php">
                 <i class="fas fa-home"></i>
                 <span class="nav-item">Cadastro</span>
             </a></li>
@@ -59,17 +64,17 @@ if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)
         </ul>
     </nav>
     <div class="wrapper">
-        <form action="">
+        <form action="enviarcadastro.php" method="POST">
             <fieldset>
                 <label for="">CNPJ:</label>
-                <input type="text">
+                <input type="text" name="cnpj" id="cnpj" required>
                 <label for="">Nome:</label>
-                <input type="text">
+                <input type="text" name="nome" id="nome" required>
                 <br>
                 <label for="">Ins Estadual:</label>
-                <input type="text">
+                <input type="text" name="ins_est" id="ins_est" required>
                 <label for="">Ins Federal:</label>
-                <input type="text">
+                <input type="text" name="ins_fed" id="ins_fed" required>
                 <br>
                 <input value="Cadastrar" class="btn" type="submit">
             </fieldset>
@@ -81,15 +86,31 @@ if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)
                             <td>Nome</td>
                             <td>Ins Estadual</td>
                             <td>Ins Federal</td>
+                            <td>Exclusão</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>2523813719</td>
-                            <td>joao</td>
-                            <td>312312321123123</td>
-                            <td>12321312312</td>
-                        </tr>
+                        <?php
+                            if($result -> num_rows > 0){
+                                while($row = $result->fetch_assoc()){
+                                    echo "<tr>";
+                                    echo "<td>" . $row["cnpj"] . "</td>";
+                                    echo "<td>" . $row["nome"] . "</td>";
+                                    echo "<td>" . $row["ins_est"] . "</td>";
+                                    echo "<td>" . $row["ins_fed"] . "</td>";
+                                    echo "<td>
+                                    <a class='btn btn-sm btn-danger ' href='deletecadastro.php?cnpj=$row[cnpj]' >
+                                        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
+                                            <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/>
+                                        </svg>
+                                    
+                                    </td>";
+                                    echo "</tr>";
+                                }
+                            }else {
+                                echo "<tr><td colspan='5'>Nenhum dado encontrado</td></tr>";
+                            }
+                        ?>
                     </tbody>
                 </table>
 

@@ -30,7 +30,7 @@ if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)
                     <span class="nav-item">Fulano</span>
                 </a>
             </li>
-            <li><a href="/admsis/cadastro/cadastro.html">
+            <li><a href="/admsis/cadastro/cadastro.php">
                 <i class="fas fa-home"></i>
                 <span class="nav-item">Cadastro</span>
             </a></li>

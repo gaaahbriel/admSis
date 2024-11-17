@@ -16,7 +16,7 @@ if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha'])
     if(mysqli_num_rows($result) < 1){
         unset($_SESSION['email']);
         unset($_SESSION['senha']);
-        header("Location: ../admsis/login/login.php");
+        header("Location: ../login/login.php");
     }else{
 
         $_SESSION['email'] = $email;
